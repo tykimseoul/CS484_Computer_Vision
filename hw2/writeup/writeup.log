@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.9.20)  5 OCT 2019 20:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.9.20)  8 OCT 2019 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -296,6 +296,24 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@lastruleclass=\count116
 \@thisrulewidth=\dimen133
 )
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
+\LTleft=\skip61
+\LTright=\skip62
+\LTpre=\skip63
+\LTpost=\skip64
+\LTchunksize=\count117
+\LTcapwidth=\dimen134
+\LT@head=\box31
+\LT@firsthead=\box32
+\LT@foot=\box33
+\LT@lastfoot=\box34
+\LT@cols=\count118
+\LT@rows=\count119
+\c@LT@tables=\count120
+\c@LT@chunks=\count121
+\LT@p@ftn=\toks19
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/matlab-prettifier/matlab-prettifi
 er.sty
 Package: matlab-prettifier 2014/06/19 v0.3 A package for prettyprinting Matlab 
@@ -475,67 +493,71 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count117
-\lst@gtempboxa=\box31
-\lst@token=\toks19
-\lst@length=\count118
-\lst@currlwidth=\dimen134
-\lst@column=\count119
-\lst@pos=\count120
-\lst@lostspace=\dimen135
-\lst@width=\dimen136
-\lst@newlines=\count121
-\lst@lineno=\count122
-\lst@maxwidth=\dimen137
+\lst@mode=\count122
+\lst@gtempboxa=\box35
+\lst@token=\toks20
+\lst@length=\count123
+\lst@currlwidth=\dimen135
+\lst@column=\count124
+\lst@pos=\count125
+\lst@lostspace=\dimen136
+\lst@width=\dimen137
+\lst@newlines=\count126
+\lst@lineno=\count127
+\lst@maxwidth=\dimen138
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
-\c@lstnumber=\count123
-\lst@skipnumbers=\count124
-\lst@framebox=\box32
+\c@lstnumber=\count128
+\lst@skipnumbers=\count129
+\lst@framebox=\box36
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
 Package: listings 2019/02/27 1.8b (Carsten Heinz)
-\netBracketCount@mlpr=\count125
-\blkLvl@mlpr=\count126
-\blkLvlAtClassdef@mlpr=\count127
-\emHeight@mlpr=\skip61
-\jayDepth@mlpr=\skip62
-\sectionRuleOffset@mlpr=\skip63
-\toks@mlpr=\toks20
+\netBracketCount@mlpr=\count130
+\blkLvl@mlpr=\count131
+\blkLvlAtClassdef@mlpr=\count132
+\emHeight@mlpr=\skip65
+\jayDepth@mlpr=\skip66
+\sectionRuleOffset@mlpr=\skip67
+\toks@mlpr=\toks21
 )
-(./writeup.aux)
+(./writeup.aux
+
+LaTeX Warning: Label `tab:table1' multiply defined.
+
+)
 \openout1 = `writeup.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 81.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 82.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 81.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 82.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-\AtBeginShipoutBox=\box33
-Package hyperref Info: Link coloring ON on input line 81.
+\AtBeginShipoutBox=\box37
+Package hyperref Info: Link coloring ON on input line 82.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -543,11 +565,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count133
 )
-LaTeX Info: Redefining \ref on input line 81.
-LaTeX Info: Redefining \pageref on input line 81.
-LaTeX Info: Redefining \nameref on input line 81.
+LaTeX Info: Redefining \ref on input line 82.
+LaTeX Info: Redefining \pageref on input line 82.
+LaTeX Info: Redefining \nameref on input line 82.
 
 (./writeup.out) (./writeup.out)
 \@outlinefile=\write3
@@ -590,17 +612,17 @@ LaTeX Info: Redefining \nameref on input line 81.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count129
-\scratchdimen=\dimen138
-\scratchbox=\box34
-\nofMPsegments=\count130
-\nofMParguments=\count131
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count132
-\MPscratchDim=\dimen139
-\MPnumerator=\count133
-\makeMPintoPDFobject=\count134
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count134
+\scratchdimen=\dimen139
+\scratchbox=\box38
+\nofMPsegments=\count135
+\nofMParguments=\count136
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count137
+\MPscratchDim=\dimen140
+\MPnumerator=\count138
+\makeMPintoPDFobject=\count139
+\everyMPtoPDFconversion=\toks23
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -618,7 +640,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \microtypecontext on input line 81.
+LaTeX Info: Redefining \microtypecontext on input line 82.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -632,31 +654,31 @@ Package microtype Info: No adjustment of character kerning.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
-\c@lstlisting=\count135
+\c@lstlisting=\count140
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 83.
+(Font)              <12> on input line 84.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 83.
+(Font)              <8> on input line 84.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 83.
+(Font)              <6> on input line 84.
 
 
 LaTeX Warning: No \author given.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 86.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 88.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 89.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 108.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 110.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -669,7 +691,7 @@ Package microtype Info: Loading generic protrusion settings for font family
  [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 134.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 133.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ts1pcr.fd
@@ -679,48 +701,143 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<placeholder.jpg, id=25, 250.9375pt x 250.9375pt>
-File: placeholder.jpg Graphic file (type jpg)
-<use placeholder.jpg>
-Package pdftex.def Info: placeholder.jpg  used on input line 148.
-(pdftex.def)             Requested size: 142.26378pt x 142.27005pt.
-File: placeholder.jpg Graphic file (type jpg)
-<use placeholder.jpg>
-Package pdftex.def Info: placeholder.jpg  used on input line 149.
-(pdftex.def)             Requested size: 142.26378pt x 142.27005pt.
+<../code/incorrect_blur.png, id=21, 523.9575pt x 393.47pt>
+File: ../code/incorrect_blur.png Graphic file (type png)
+<use ../code/incorrect_blur.png>
+Package pdftex.def Info: ../code/incorrect_blur.png  used on input line 147.
+(pdftex.def)             Requested size: 170.71652pt x 128.20044pt.
+<../code/correct_blur.png, id=22, 523.9575pt x 393.47pt>
+File: ../code/correct_blur.png Graphic file (type png)
+<use ../code/correct_blur.png>
+Package pdftex.def Info: ../code/correct_blur.png  used on input line 148.
+(pdftex.def)             Requested size: 170.71652pt x 128.20044pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 158.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
-[2] [3 <./placeholder.jpg>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
+<../code/identity_image_my.jpg, id=24, 288.07625pt x 253.94875pt>
+File: ../code/identity_image_my.jpg Graphic file (type jpg)
+<use ../code/identity_image_my.jpg>
+Package pdftex.def Info: ../code/identity_image_my.jpg  used on input line 167.
+
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/identity_image_original.jpg, id=25, 288.07625pt x 253.94875pt>
+File: ../code/identity_image_original.jpg Graphic file (type jpg)
+<use ../code/identity_image_original.jpg>
+Package pdftex.def Info: ../code/identity_image_original.jpg  used on input lin
+e 167.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/blur_image_my.jpg, id=26, 288.07625pt x 253.94875pt>
+File: ../code/blur_image_my.jpg Graphic file (type jpg)
+<use ../code/blur_image_my.jpg>
+Package pdftex.def Info: ../code/blur_image_my.jpg  used on input line 169.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/blur_image_original.jpg, id=27, 288.07625pt x 253.94875pt>
+File: ../code/blur_image_original.jpg Graphic file (type jpg)
+<use ../code/blur_image_original.jpg>
+Package pdftex.def Info: ../code/blur_image_original.jpg  used on input line 16
+9.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/large_blur_image_my.jpg, id=28, 288.07625pt x 253.94875pt>
+File: ../code/large_blur_image_my.jpg Graphic file (type jpg)
+<use ../code/large_blur_image_my.jpg>
+Package pdftex.def Info: ../code/large_blur_image_my.jpg  used on input line 17
+1.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/large_blur_image_original.jpg, id=29, 288.07625pt x 253.94875pt>
+File: ../code/large_blur_image_original.jpg Graphic file (type jpg)
+<use ../code/large_blur_image_original.jpg>
+Package pdftex.def Info: ../code/large_blur_image_original.jpg  used on input l
+ine 171.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/sobel_image_my.jpg, id=30, 288.07625pt x 253.94875pt>
+File: ../code/sobel_image_my.jpg Graphic file (type jpg)
+<use ../code/sobel_image_my.jpg>
+Package pdftex.def Info: ../code/sobel_image_my.jpg  used on input line 173.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/sobel_image_original.jpg, id=31, 288.07625pt x 253.94875pt>
+File: ../code/sobel_image_original.jpg Graphic file (type jpg)
+<use ../code/sobel_image_original.jpg>
+Package pdftex.def Info: ../code/sobel_image_original.jpg  used on input line 1
+73.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/laplacian_image_my.jpg, id=32, 288.07625pt x 253.94875pt>
+File: ../code/laplacian_image_my.jpg Graphic file (type jpg)
+<use ../code/laplacian_image_my.jpg>
+Package pdftex.def Info: ../code/laplacian_image_my.jpg  used on input line 175
+.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/laplacian_image_original.jpg, id=33, 288.07625pt x 253.94875pt>
+File: ../code/laplacian_image_original.jpg Graphic file (type jpg)
+<use ../code/laplacian_image_original.jpg>
+Package pdftex.def Info: ../code/laplacian_image_original.jpg  used on input li
+ne 175.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/high_pass_image_my.jpg, id=34, 288.07625pt x 253.94875pt>
+File: ../code/high_pass_image_my.jpg Graphic file (type jpg)
+<use ../code/high_pass_image_my.jpg>
+Package pdftex.def Info: ../code/high_pass_image_my.jpg  used on input line 177
+.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+<../code/high_pass_image_original.jpg, id=35, 288.07625pt x 253.94875pt>
+File: ../code/high_pass_image_original.jpg Graphic file (type jpg)
+<use ../code/high_pass_image_original.jpg>
+Package pdftex.def Info: ../code/high_pass_image_original.jpg  used on input li
+ne 177.
+(pdftex.def)             Requested size: 113.81102pt x 100.32996pt.
+[2] [3 <../code/incorrect_blur.png (PNG copy)> <../code/correct_blur.png (PNG c
+opy)> <../code/identity_image_my.jpg> <../code/identity_image_original.jpg> <..
+/code/blur_image_my.jpg> <../code/blur_image_original.jpg> <../code/large_blur_
+image_my.jpg> <../code/large_blur_image_original.jpg>]
+<../code/low.png, id=67, 411.5375pt x 362.35374pt>
+File: ../code/low.png Graphic file (type png)
+<use ../code/low.png>
+Package pdftex.def Info: ../code/low.png  used on input line 183.
+(pdftex.def)             Requested size: 113.81102pt x 100.20879pt.
+<../code/high.png, id=68, 411.5375pt x 362.35374pt>
+File: ../code/high.png Graphic file (type png)
+<use ../code/high.png>
+Package pdftex.def Info: ../code/high.png  used on input line 184.
+(pdftex.def)             Requested size: 113.81102pt x 100.20879pt.
+<../code/hybrid.png, id=69, 411.5375pt x 362.35374pt>
+File: ../code/hybrid.png Graphic file (type png)
+<use ../code/hybrid.png>
+Package pdftex.def Info: ../code/hybrid.png  used on input line 185.
+(pdftex.def)             Requested size: 113.81102pt x 100.20879pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
+ [4 <../code/sobel_image_my.jpg> <../code/sobel_image_original.jpg> <../code/la
+placian_image_my.jpg> <../code/laplacian_image_original.jpg> <../code/high_pass
+_image_my.jpg> <../code/high_pass_image_original.jpg> <../code/low.png (PNG cop
+y)> <../code/high.png (PNG copy)> <../code/hybrid.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
  (./writeup.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
 Package rerunfilecheck Info: File `writeup.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
  ) 
 Here is how much of TeX's memory you used:
- 11371 strings out of 492616
- 168047 string characters out of 6129481
- 359587 words of memory out of 5000000
- 15066 multiletter control sequences out of 15000+600000
- 19721 words of font info for 76 fonts, out of 8000000 for 9000
+ 11536 strings out of 492616
+ 171500 string characters out of 6129481
+ 387608 words of memory out of 5000000
+ 15208 multiletter control sequences out of 15000+600000
+ 19221 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,12n,56p,984b,2043s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,56p,984b,2041s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2019/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2
 019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on writeup.pdf (3 pages, 62548 bytes).
+Output written on writeup.pdf (4 pages, 996784 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
- 33 named destinations out of 1000 (max. 500000)
- 15878 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 98 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 35 named destinations out of 1000 (max. 500000)
+ 15446 words of extra memory for PDF output out of 17280 (max. 10000000)
 

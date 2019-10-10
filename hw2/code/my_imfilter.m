@@ -18,8 +18,8 @@ function output = my_imfilter(image, filter)
 % A better approach is to mirror or reflect the image content in the padding.
 
 % Uncomment to call imfilter to see the desired behavior.
-default = imfilter(image, filter, 'conv');
-imwrite(default, 'default.png')
+% default = imfilter(image, filter, 'conv');
+% imwrite(default, 'default.png')
 
 %%%%%%%%%%%%%%%%
 % Your code here
@@ -39,6 +39,8 @@ for d=1:size(padded_image, 3)
     end
 end
 output=filtered_image(pad_size(1)+1:size(image,1)+pad_size(1), pad_size(2)+1:size(image,2)+pad_size(2), :);
-output_size=size(output)
+% output_size=size(output)
 imwrite(output, 'output.png')
-imwrite(default-output, 'diff.png')
+% diff=default-output;
+% diff(diff~=0)=1;
+% imwrite(diff, 'diff.png')

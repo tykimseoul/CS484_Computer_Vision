@@ -16,12 +16,12 @@ figure(1)
 imshow(test_image)
 
 %% Even Length
-even_filter = [0.25 0.75 -0.75 -0.25]
-odd_filter = [0 0.25 0.75 -0.75 -0.25]
-even_image = my_imfilter(test_image, even_filter)
-odd_image = my_imfilter(test_image, odd_filter)
-diff=nnz(even_image-odd_image)/numel(test_image)
-
+% even_filter = [0.25 0.75 -0.75 -0.25]
+% odd_filter = [0 0.25 0.75 -0.75 -0.25]
+% even_image = my_imfilter(test_image, even_filter)
+% odd_image = my_imfilter(test_image, odd_filter)
+% diff=nnz(even_image-odd_image)/numel(test_image)
+% 
 %% Hybrid Image
 image1 = im2single(imread('../data/cat.bmp'));
 image2 = im2single(imread('../data/dog.bmp'));
@@ -37,7 +37,9 @@ identity_filter = [0 0 0; 0 1 0; 0 0 0];
 identity_image  = my_imfilter(test_image, identity_filter);
 
 figure(2); imshow(identity_image);
-imwrite(identity_image, 'identity_image.jpg', 'quality', 95);
+imwrite(identity_image, 'identity_image_my.jpg', 'quality', 95);
+original=imfilter(test_image, identity_filter, 'conv');
+imwrite(original, 'identity_image_original.jpg', 'quality', 95);
 
 %% Small blur with a box filter
 %This filter should remove some high frequencies
@@ -46,8 +48,9 @@ blur_filter = blur_filter / sum(sum(blur_filter)); %making the filter sum to 1
 
 blur_image = my_imfilter(test_image, blur_filter);
 
-figure(3); imshow(blur_image);
-imwrite(blur_image, 'blur_image.jpg', 'quality', 95);
+% figure(3); imshow(blur_image);
+imwrite(blur_image, 'blur_image_my.jpg', 'quality', 95);
+imwrite(imfilter(test_image, blur_filter, 'conv'), 'blur_image_original.jpg', 'quality', 95);
 
 %% Large blur
 %This blur would be slow to do directly, so we instead use the fact that
@@ -57,8 +60,12 @@ large_1d_blur_filter = fspecial('Gaussian', [25 1], 10);
 large_blur_image = my_imfilter(test_image, large_1d_blur_filter);
 large_blur_image = my_imfilter(large_blur_image, large_1d_blur_filter'); %notice the ' operator which transposes the filter
 
-figure(4); imshow(large_blur_image);
-imwrite(large_blur_image, 'large_blur_image.jpg', 'quality', 95);
+% figure(4); imshow(large_blur_image);
+imwrite(large_blur_image, 'large_blur_image_my.jpg', 'quality', 95);
+
+large_blur_image = imfilter(test_image, large_1d_blur_filter, 'conv');
+large_blur_image = imfilter(large_blur_image, large_1d_blur_filter', 'conv'); %notice the ' operator which transposes the filter
+imwrite(large_blur_image, 'large_blur_image_original.jpg', 'quality', 95);
 
 % %If you want to see how slow this would be to do naively, try out this
 % %equivalent operation:
@@ -74,7 +81,9 @@ sobel_image = my_imfilter(test_image, sobel_filter);
 
 %0.5 added because the output image is centered around zero otherwise and mostly black
 figure(5); imshow(sobel_image + 0.5);
-imwrite(sobel_image + 0.5, 'sobel_image.jpg', 'quality', 95);
+imwrite(sobel_image + 0.5, 'sobel_image_my.jpg', 'quality', 95);
+imwrite(imfilter(test_image, sobel_filter, 'conv')+0.5, 'sobel_image_original.jpg', 'quality', 95);
+
 
 
 %% High pass filter (Discrete Laplacian)
@@ -83,12 +92,14 @@ laplacian_filter = [0 1 0; 1 -4 1; 0 1 0];
 laplacian_image = my_imfilter(test_image, laplacian_filter);
 
 %0.5 added because the output image is centered around zero otherwise and mostly black
-figure(6); imshow(laplacian_image + 0.5);
-imwrite(laplacian_image + 0.5, 'laplacian_image.jpg', 'quality', 95);
+% figure(6); imshow(laplacian_image + 0.5);
+imwrite(laplacian_image + 0.5, 'laplacian_image_my.jpg', 'quality', 95);
+imwrite(imfilter(test_image, laplacian_filter, 'conv')+0.5, 'laplacian_image_original.jpg', 'quality', 95);
 
 
 %% High pass "filter" alternative
 high_pass_image = test_image - blur_image; %simply subtract the low frequency content
 
-figure(7); imshow(high_pass_image + 0.5);
-imwrite(high_pass_image + 0.5, 'high_pass_image.jpg', 'quality', 95);
+% figure(7); imshow(high_pass_image + 0.5);
+imwrite(high_pass_image + 0.5, 'high_pass_image_my.jpg', 'quality', 95);
+imwrite(test_image - imfilter(test_image, blur_filter, 'conv')+0.5, 'high_pass_image_original.jpg', 'quality', 95);

@@ -59,6 +59,7 @@
 \usepackage{microtype}
 \usepackage{times}
 \usepackage{booktabs}
+\usepackage{longtable}
 
 % From https://ctan.org/pkg/matlab-prettifier
 \usepackage[numbered,framed]{matlab-prettifier}
@@ -95,15 +96,16 @@
 
 \section*{Algorithm Implementation}
 
-In the filtering of an image using convolution, a filter called the kernel is applied to each pixel of the image. The given my\_imfilter takes the image and the filter as parameters and returns the ouput. 
-After studying the convolution filtering algorithm, I learned that the filter should be flipped both horizontally and vertically before applying. The flipping of the kernel is done in line 1 of the code below. 
-When applying the kernel on elements at the edge, there should be padding around it so that the size of the kernel and the size of the element and its neighbor match. The width of the padding is half the size of the kernel at respective dimensions. The calculation of the padding size and padding the image is done in lines 2 and 3. 
-After applying filter to the padded image, the resulting matrix is the same size as the padded image. Thus, a zero matrix of the same size as padded image is created in line 4.
-The given image is in RGB space, so the for loop is iterated through the third dimension of the image matrix in line 5.
-Only the pixels that are not paddings are iterated in the double for loop in lines 6 and 7. 
-The target area centered at the pixel (i,j) is accessed in line 8.
-The corresponding element in the resulting filtered image is updated by the sum of elements of the element-wise multiplication between the target matrix and the kernel. This is the main idea of convolution filtering and shown in line 9.
-After the triple for loops, the filtered image should be cropped back to match the original image size. The crop is done in line 13.
+In the filtering of an image using convolution, a filter called the kernel is applied to each pixel of the image. The given my\_imfilter takes the image and the filter as parameters and returns the ouput. \\
+After studying the convolution filtering algorithm, I learned that the filter should be flipped both horizontally and vertically before applying. The flipping of the kernel is done in line (1) of the code below. \\
+When applying the kernel on elements at the edge, there should be padding around it so that the size of the kernel and the size of the element and its neighbor match. The width of the padding is half the size of the kernel at respective dimensions. The calculation of the padding size and padding the image is done in lines (2) and (3). \\
+After applying filter to the padded image, the resulting matrix is the same size as the padded image. Thus, a zero matrix of the same size as padded image is created in line (4).\\
+The given image is in RGB space, so the for loop is iterated through the third dimension of the image matrix in line (5).
+Only the pixels that are not paddings are iterated in the double for loop in lines (6) and (7). 
+The target area centered at the pixel (i,j) is accessed in line (8).\\
+The corresponding element in the resulting filtered image is updated by the sum of elements of the element-wise multiplication between the target matrix and the kernel. This is the main idea of convolution filtering and shown in line (9).
+After the triple for loops, the filtered image should be cropped back to match the original image size. The crop is done in line (13).
+\\The full code is in file \emph{my\_imfilter.m}.
 
 \begin{lstlisting}[style=Matlab-editor]
 flipped_kernel = flip(flip(filter, 1), 2);
@@ -122,49 +124,67 @@ output=filtered_image(pad_size(1)+1:size(image,1)+pad_size(1), pad_size(2)+1:siz
 
 \end{lstlisting}
 
-\section*{Attempts}
+Also, an hybrid image is created using the gen\_hybrid\_image function which uses the my\_imfilter function.
+Implementation is as below (\emph{gen\_hybrid\_image.m}).
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-My code snippet highlights an interesting point.
 \begin{lstlisting}[style=Matlab-editor]
-one = 1;
-two = one + one;
-if two == 2
-    disp( 'This computer is not broken.' );
-end
+function [hybrid_image,low_frequencies,high_frequencies] = gen_hybrid_image( image1, image2, cutoff_frequency )
+
+filter = fspecial('Gaussian', cutoff_frequency*4+1, cutoff_frequency);
+low_frequencies = my_imfilter(image1, filter);
+
+high_frequencies = image2-my_imfilter(image2, filter);
+
+hybrid_image = low_frequencies + high_frequencies;
 \end{lstlisting}
 
-\section*{A Result}
+\section*{Attempts}
 
-\begin{enumerate}
-    \item Result 1 was a total failure, because...
-    \item Result 2 (Figure~\ref{fig:result1}, left) was surprising, because...
-    \item Result 3 (Figure~\ref{fig:result1}, right) blew my socks off, because...
-\end{enumerate}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=5cm]{placeholder.jpg}
-    \includegraphics[width=5cm]{placeholder.jpg}
-    \caption{\emph{Left:} My result was spectacular. \emph{Right:} Curious.}
-    \label{fig:result1}
+While implementing the algorithm, there were several bugs and errors that I had to resolve.
+The most difficult test case to pass was the large blur. Initially, I had an incorrect padding calculation and ended up with the following image. Shown in Figure~\ref{fig:result1}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=6cm]{../code/incorrect_blur.png}
+	\includegraphics[width=6cm]{../code/correct_blur.png}
+	\caption{\emph{Left:} Incorrect padding calculation. \emph{Right:} After fix..}
+	\label{fig:result1}
 \end{figure}
+\\Also, I attempted creating a function for element-wise multiplication between matrices. However, it made the code to be longer and difficult to debug. Later, I found that the same arithmetic can be performed by the "." operator in front of the multiplication operator "*", and replaced the corresponding code with a simpler version.
+\\Most of other errors were about calculation between matricies of different dimensions.
 
-My results are summarized in Table~\ref{tab:table1}.
+\section*{Results}
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{lr}
-        \toprule
-        Condition & Time (seconds) \\
-        \midrule
-        Test 1 & 1 \\
-        Test 2 & 1000 \\
-        \bottomrule
-    \end{tabular}
-    \caption{Stunning revelation about the efficiency of my code.}
-    \label{tab:table1}
-\end{table}
+The results of the test cases are shown in Table~\ref{tab:table1}. The difference between the results of original function and my\_imfilter is unnoticeable to the eye.
+	\begin{longtable}[h!]{|c|c|c|}
+		\caption{Comparison between my\_imfilter and original imfilter functions.}
+		\label{tab:table1}\\
+ 		\hline
+		Test case & my\_imfilter & imfilter \\
+		\hline
+		 \endhead
+		 \hline
+		 \endfoot
+		Identity & \includegraphics[width=4cm]{../code/identity_image_my.jpg} & \includegraphics[width=4cm]{../code/identity_image_original.jpg} \\
+		\hline
+		Small Blur & \includegraphics[width=4cm]{../code/blur_image_my.jpg} & \includegraphics[width=4cm]{../code/blur_image_original.jpg} \\
+		\hline
+		Large Blur & \includegraphics[width=4cm]{../code/large_blur_image_my.jpg} & \includegraphics[width=4cm]{../code/large_blur_image_original.jpg} \\
+		\hline
+		Sobel Filter & \includegraphics[width=4cm]{../code/sobel_image_my.jpg} & \includegraphics[width=4cm]{../code/sobel_image_original.jpg} \\
+		\hline
+		Laplacian FIlter & \includegraphics[width=4cm]{../code/laplacian_image_my.jpg} & \includegraphics[width=4cm]{../code/laplacian_image_original.jpg} \\
+		\hline
+		High Pass & \includegraphics[width=4cm]{../code/high_pass_image_my.jpg} & \includegraphics[width=4cm]{../code/high_pass_image_original.jpg} \\
+	\end{longtable}
+
+The results of the hybrid image is shown in Figure~\ref{fig:result2}. High frequencies are removed from the cat image and the low frequencies are removed from the dog image. The low passed image tends to be blurry because the difference from the neighboring pixels is reduced. On the other hand, high passed filter tends to be sharpened. The resulting images are combined to create the hybrid image.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=4cm]{../code/low.png}
+	\includegraphics[width=4cm]{../code/high.png}
+	\includegraphics[width=4cm]{../code/hybrid.png}
+	\caption{\emph{Left:} Low frequency cat image. \emph{Middle:} High frequency dog image. \emph{Right:} Hybrid image}
+	\label{fig:result2}
+\end{figure}
 
 \end{document}

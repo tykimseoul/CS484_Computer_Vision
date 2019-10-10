@@ -1,4 +1,4 @@
-function createSubmissionZIP()
+% function createSubmissionZIP()
 % CS484: Introduction to Computer Vision
 % Acknowledgements:
 % The original code is written by Prof. James Tompkin (james_tompkin@brown.edu).
@@ -59,4 +59,4 @@ end
 zip( 'cs484submission.zip', {'code/*.m','writeup/writeup.pdf', 'questions/2019_Fall_Homework2_Questions.pdf'} );
 disp( 'cs484submission.zip file is successfully generated.' );
 
-end
+% end
