@@ -13,7 +13,6 @@ function f = calculate_fundamental_matrix(pts1, pts2)
     for i=1:size(x,2)
         A=cat(1,A,reshape((x(:,i).*xp(i,:))',[1 9]));
     end
-    %column-wise or row-wise??
     F=reshape(smallest_eigenvector(A'*A),[3 3])
     F=update_sv(F);
     
@@ -30,6 +29,10 @@ end
 
 function Fp = update_sv(F)
     [U,S,V]=svd(F);
-    S(3,3)=0;
+    [~,idx]=sort(diag(S));
+    S=S(idx, idx);
+    V=V(:,idx);
+    U=U(:,idx);
+    S(1,1)=0;
     Fp=U*S*V';
 end
