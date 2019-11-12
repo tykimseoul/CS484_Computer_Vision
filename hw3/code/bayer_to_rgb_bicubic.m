@@ -38,8 +38,8 @@ function result = bicubic(channel)
     padded=cat(2, padded, padded(:,size(padded,2)-1));
     paddedCpy=padded;
 
-%     X=[-1 0 1 8; 1 0 1 4; -1 0 1 2; 1 1 1 1];
-    X=[-8 0 8 64; 4 0 4 16; -2 0 2 4; 1 1 1 1];
+    X=[-1 0 1 8; 1 0 1 4; -1 0 1 2; 1 1 1 1];
+%     X=[-8 0 8 64; 4 0 4 16; -2 0 2 4; 1 1 1 1];
     Y=X';
     for i=3:size(padded,1)-3
         for j=3:size(padded,2)-3

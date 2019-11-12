@@ -6,12 +6,12 @@ function d = calculate_disparity_map(img_left, img_right, window_size, max_dispa
     cost_vol = zeros(size(img_left,1), size(img_left,2), max_disparity);
     size(cost_vol)
     
-    for i = 1:size(img_left,1)-window_size+1
-        for j = 1:size(img_left,2)-window_size+1
-            l = img_left(i:i+window_size-1,j:j+window_size-1);
+    for i = ceil(window_size/2):size(img_left,1)-floor(window_size/2)
+        for j = ceil(window_size/2):size(img_left,2)-floor(window_size/2)
+            l = img_left(i-floor(window_size/2):i+floor(window_size/2),j-floor(window_size/2):j+floor(window_size/2));
             for k = 1:max_disparity
-                if j>k
-                    r = img_right(i:i+window_size-1,(j-k):(j-k)+window_size-1);
+                if (j-k)-floor(window_size/2)>0
+                    r = img_right(i-floor(window_size/2):i+floor(window_size/2),(j-k)-floor(window_size/2):(j-k)+floor(window_size/2));
                     cost_vol(i,j,k) = ncc(l,r);
                 end
             end
