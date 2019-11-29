@@ -23,13 +23,42 @@
 
 function [matches, confidences] = match_features(features1, features2)
 
-% Placeholder random matches and confidences.
+% features1 = [3 2; 1 4; 2 5]
+% features2 = [6 4; 5 6; 3 4]
 num_features = min(size(features1, 1), size(features2,1));
+pd = pairwise_distance(features1, features2);
+size(pd)
+[sortdist, sortindex] = sort(pd,2,'ascend');
+nndr = sortdist(:,1)./sortdist(:,2);
+
 matches = zeros(num_features, 2);
-matches(:,1) = randperm(num_features); 
-matches(:,2) = randperm(num_features);
-confidences = rand(num_features,1);
+matches(:,1) = 1:size(features1);
+matches(:,2) = sortindex(:,1);
+
+good_indices = find(nndr>0.8);
+
+matches = [matches(good_indices,1), matches(good_indices,2)];    
+confidences = 1./nndr(good_indices);
+
+[confidences, ind] = sort(confidences, 'descend');
+matches = matches(ind,:);
+
 
 % Remember that the NNDR test will return a number close to 1 for 
 % feature points with similar distances.
 % Think about how confidence relates to NNDR.
+% 1/NNDR
+end
+
+function pd = pairwise_distance(X,Y)
+    pd = zeros(size(X,1),size(Y,1));
+    for m=1:size(X,1)
+        for n=1:size(Y,1)
+            %sum of squares of elements
+            pd(m,n) = norm(X(m,:)-Y(n,:));
+        end
+    end
+end
+
+
+

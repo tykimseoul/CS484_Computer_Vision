@@ -56,11 +56,37 @@ function [features] = get_features(image, x, y, descriptor_window_image_width)
 
 %Placeholder that you can delete. Empty features.
 features = zeros(size(x,1), 128, 'single');
+gauss_filter = fspecial('Gaussian', 5, 1);
+d = 1;
 
+Dx = imderivative(gauss_filter, [1 0]*d);
+Dy = imderivative(gauss_filter, [0 1]*d);
 
+Ix = imfilter(image, Dx, 'symmetric', 'same', 'conv');
+Iy = imfilter(image, Dy, 'symmetric', 'same', 'conv');
 
+for i=1:size(x)
+    patch_Ix = Ix((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
+    patch_Iy = Iy((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
+    
+    orientation = radtodeg(atan2(patch_Iy,patch_Ix));
+    quads = ceil(orientation/45);
+    
+    for m = 1:4
+        for n = 1:4
+            patch = quads(m*4-3:m*4, n*4-3:n*4);
+            qcounts = histcounts(patch,8);
+            [mx,idx] = max(qcounts);
+            qcounts = circshift(qcounts, size(qcounts)-idx+1);
+            % shift so that peak is at front
+            for bins = 1:8
+                %normalize features??
+                features(i,(4*(m-1)+n)*8+1:(4*(m-1)+n)*8+8) = qcounts;
+            end
+        end
+    end
 end
-
+end
 
 
 

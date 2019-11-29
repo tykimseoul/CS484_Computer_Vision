@@ -30,7 +30,7 @@ descriptor_window_image_width = 16;
 maxPtsEval = 100;
 
 % Whether to use the 'cheat' hand-picked interest points
-cheatInterestPoints = false;
+cheatInterestPoints = true;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Notre Dame de Paris
