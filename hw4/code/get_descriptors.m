@@ -81,6 +81,7 @@ for i = 1:size(x,1)
         end
     end
 end
+features = features.^0.8;
 end
 
 
