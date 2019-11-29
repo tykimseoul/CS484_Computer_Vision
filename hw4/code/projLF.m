@@ -52,19 +52,26 @@ else
     % Use cheat_interest_points only for development and debugging!
     [x1, y1, x2, y2] = cheat_interest_points(eval_file, scale_factor, image1, image2, descriptor_window_image_width);
 end
+%%
+accs=[];
+size_range = 1:30;
+for s=size_range
+    % 2) Create feature descriptors at each interest point. Szeliski 4.1.2
+    [image1_features] = get_descriptors(image1, x1, y1, descriptor_window_image_width, s);
+    [image2_features] = get_descriptors(image2, x2, y2, descriptor_window_image_width, s);
 
-% 2) Create feature descriptors at each interest point. Szeliski 4.1.2
-[image1_features] = get_descriptors(image1, x1, y1, descriptor_window_image_width);
-[image2_features] = get_descriptors(image2, x2, y2, descriptor_window_image_width);
+    % 3) Match features. Szeliski 4.1.3
+    [matches, confidences] = match_features(image1_features, image2_features);
 
-% 3) Match features. Szeliski 4.1.3
-[matches, confidences] = match_features(image1_features, image2_features);
-
-% Evaluate matches
-[~,~,~,accMPEND] = evaluate_correspondence(image1, image2, eval_file, scale_factor, ... 
-                        x1, y1, x2, y2, matches, confidences, ...
-                        maxPtsEval, visualize, 'eval_ND.png' );
-
+    % Evaluate matches
+    [~,~,accAll,accMPEND] = evaluate_correspondence(image1, image2, eval_file, scale_factor, ... 
+                            x1, y1, x2, y2, matches, confidences, ...
+                            maxPtsEval, visualize, 'eval_ND.png' );
+    accs(s) = accAll;
+end
+figure
+plot(size_range, accs);
+[mx,idx] = max(accs)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mount Rushmore
