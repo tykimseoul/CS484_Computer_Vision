@@ -28,20 +28,21 @@ pd = pairwise_distance(features1, features2);
 [sortdist, sortindex] = sort(pd,2,'ascend');
 nndr = sortdist(:,1)./sortdist(:,2);
 
-matches = zeros(num_features, 2);
+matches = zeros(size(features1, 1), 2);
+
 matches(:,1) = 1:size(features1);
 matches(:,2) = sortindex(:,1);
 
-good_indices = find(nndr<0.8);
+good_indices = find(nndr<0.93);
 
-matches = [matches(good_indices,1), matches(good_indices,2)]; 
+matches = matches(good_indices,:); 
 
 confidences = 1./nndr(good_indices);
 
 [confidences, ind] = sort(confidences, 'descend');
 % get top 100 indices
-ind = ind(1:min(100,size(ind)));
-confidences = confidences(ind,:);
+confidences = confidences(1:min(100,size(confidences)));
+ind = ind(1:min(100,size(matches)));
 matches = matches(ind,:);
 
 % Remember that the NNDR test will return a number close to 1 for 

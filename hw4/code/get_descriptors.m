@@ -56,19 +56,23 @@ function [features] = get_features(image, x, y, descriptor_window_image_width, s
 
 %Placeholder that you can delete. Empty features.
 features = zeros(size(x,1), 128, 'single');
-gauss_filter = fspecial('Gaussian', sz, 1.5);
-d = 1;
+gauss_filter = fspecial('Gaussian', sz, 1);
 
-Dx = imderivative(gauss_filter, [1 0]*d);
-Dy = imderivative(gauss_filter, [0 1]*d);
+Dx = imderivative(gauss_filter, [1 0]);
+Dy = imderivative(gauss_filter, [0 1]);
 
 Ix = imfilter(image, Dx, 'symmetric', 'same', 'conv');
 Iy = imfilter(image, Dy, 'symmetric', 'same', 'conv');
 for i = 1:size(x,1)
+    if(x(i)<8 || y(i)<8 || x(i)+8>size(Ix,2) || y(i)+8>size(Iy,1))
+        % skip out of image patches
+        continue
+    end
     patch_Ix = Ix((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
     patch_Iy = Iy((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
+    main_dir = radtodeg(atan2(y(i),x(i)));
     %computing the tangent in degrees
-    orientation = radtodeg(atan2(patch_Iy,patch_Ix))+180;
+    orientation = radtodeg(atan2(patch_Iy,patch_Ix))-main_dir+180;
     %computing the 8 quandrants
     quads = ceil(orientation/45);
     for m = 1:4

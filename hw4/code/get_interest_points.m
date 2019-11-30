@@ -36,9 +36,37 @@ function [x, y, confidence, scale, orientation] = get_interest_points(image, des
 % could use this to ensure that every interest point is at a local maximum
 % of cornerness.
 
-% Placeholder that you can delete -- random points
-x = ceil(rand(500,1) * size(image,2));
-y = ceil(rand(500,1) * size(image,1));
+% close all
+alpha = 0.05;
+threshold = -0.01;
+
+%apply double derivative to the filter first then apply to the image, to remove the effects of noise
+gauss_filter = fspecial('Gaussian', 11, 1);
+
+Dx = imderivative(gauss_filter, [1 0]);
+Dy = imderivative(gauss_filter, [0 1]);
+Dxy = imderivative(gauss_filter, [1 1]);
+
+Dx2 = Dx.*Dx;
+Dy2 = Dy.*Dy;
+
+Ix2 = imfilter(image, Dx2, 'symmetric', 'same', 'conv');
+Iy2 = imfilter(image, Dy2, 'symmetric', 'same', 'conv');
+Ixy = imfilter(image, Dxy, 'symmetric', 'same', 'conv');
+
+% Ix = imfilter(image, Dx, 'symmetric', 'same', 'conv');
+% Iy = imfilter(image, Dy, 'symmetric', 'same', 'conv');
+% Ixy = imfilter(image, Dxy, 'symmetric', 'same', 'conv');
+% Ix2 = Ix.*Ix;
+% Iy2 = Iy.*Iy;
+
+Ix2 = imfilter(Ix2, gauss_filter, 'symmetric', 'same', 'conv');
+Iy2 = imfilter(Iy2, gauss_filter, 'symmetric', 'same', 'conv');
+Ixy = imfilter(Ixy, gauss_filter, 'symmetric', 'same', 'conv');
+
+C = Ix2.*Iy2-(Ixy.*Ixy)-alpha*((Ix2+Iy2).*(Ix2+Iy2));
+
+[y,x] = find(C<threshold);
 
 
 % After computing interest points, here's roughly how many we return
