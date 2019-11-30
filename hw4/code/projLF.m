@@ -54,7 +54,7 @@ else
 end
 %%
 accs=[];
-size_range = 1:30;
+size_range = 3:30;
 for s=size_range
     % 2) Create feature descriptors at each interest point. Szeliski 4.1.2
     [image1_features] = get_descriptors(image1, x1, y1, descriptor_window_image_width, s);
@@ -70,7 +70,7 @@ for s=size_range
     accs(s) = accAll;
 end
 figure
-plot(size_range, accs);
+plot(1:30, accs);
 [mx,idx] = max(accs)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

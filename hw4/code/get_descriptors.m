@@ -56,7 +56,7 @@ function [features] = get_features(image, x, y, descriptor_window_image_width, s
 
 %Placeholder that you can delete. Empty features.
 features = zeros(size(x,1), 128, 'single');
-gauss_filter = fspecial('Gaussian', sz, 1);
+gauss_filter = fspecial('Gaussian', sz, 1.5);
 d = 1;
 
 Dx = imderivative(gauss_filter, [1 0]*d);
@@ -74,7 +74,7 @@ for i = 1:size(x,1)
     for m = 1:4
         for n = 1:4
             patch4 = quads(m*4-3:m*4, n*4-3:n*4);
-            qcounts = histcounts(patch4,[0.5:1:8.5]);
+            qcounts = histcounts(patch4,0.5:1:8.5);
 %             [mx,idx] = max(qcounts);
 %             qcounts = circshift(qcounts, size(qcounts)-idx+1)
             features(i,(4*(m-1)+(n-1))*8+1:(4*(m-1)+(n-1))*8+8) = qcounts;

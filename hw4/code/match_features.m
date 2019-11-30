@@ -23,11 +23,8 @@
 
 function [matches, confidences] = match_features(features1, features2)
 
-% features1 = [3 2; 1 4; 2 5]
-% features2 = [6 4; 5 6; 3 4]
 num_features = min(size(features1, 1), size(features2,1));
 pd = pairwise_distance(features1, features2);
-size(pd)
 [sortdist, sortindex] = sort(pd,2,'ascend');
 nndr = sortdist(:,1)./sortdist(:,2);
 
@@ -35,14 +32,17 @@ matches = zeros(num_features, 2);
 matches(:,1) = 1:size(features1);
 matches(:,2) = sortindex(:,1);
 
-good_indices = find(nndr>0.8);
+good_indices = find(nndr<0.8);
 
-matches = [matches(good_indices,1), matches(good_indices,2)];    
+matches = [matches(good_indices,1), matches(good_indices,2)]; 
+
 confidences = 1./nndr(good_indices);
 
 [confidences, ind] = sort(confidences, 'descend');
+% get top 100 indices
+ind = ind(1:min(100,size(ind)));
+confidences = confidences(ind,:);
 matches = matches(ind,:);
-
 
 % Remember that the NNDR test will return a number close to 1 for 
 % feature points with similar distances.
