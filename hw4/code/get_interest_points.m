@@ -41,7 +41,7 @@ alpha = 0.05;
 threshold = -0.01;
 
 %apply double derivative to the filter first then apply to the image, to remove the effects of noise
-gauss_filter = fspecial('Gaussian', 11, 1);
+gauss_filter = fspecial('Gaussian', 11, 0.5);
 
 Dx = imderivative(gauss_filter, [1 0]);
 Dy = imderivative(gauss_filter, [0 1]);
@@ -60,11 +60,11 @@ Ixy = imfilter(image, Dxy, 'symmetric', 'same', 'conv');
 % Ix2 = Ix.*Ix;
 % Iy2 = Iy.*Iy;
 
-Ix2 = imfilter(Ix2, gauss_filter, 'symmetric', 'same', 'conv');
-Iy2 = imfilter(Iy2, gauss_filter, 'symmetric', 'same', 'conv');
-Ixy = imfilter(Ixy, gauss_filter, 'symmetric', 'same', 'conv');
+Gx2 = imfilter(Ix2, gauss_filter, 'symmetric', 'same', 'conv');
+Gy2 = imfilter(Iy2, gauss_filter, 'symmetric', 'same', 'conv');
+Gxy = imfilter(Ixy, gauss_filter, 'symmetric', 'same', 'conv');
 
-C = Ix2.*Iy2-(Ixy.*Ixy)-alpha*((Ix2+Iy2).*(Ix2+Iy2));
+C = Gx2.*Gy2-(Gxy.*Gxy)-alpha*((Gx2+Gy2).*(Gx2+Gy2));
 
 [y,x] = find(C<threshold);
 

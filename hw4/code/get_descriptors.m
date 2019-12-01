@@ -16,7 +16,7 @@
 %   following size: [length(x) x feature dimensionality] (e.g. 128 for
 %   standard SIFT)
 
-function [features] = get_features(image, x, y, descriptor_window_image_width, sz)
+function [features] = get_features(image, x, y, descriptor_window_image_width,sz)
 
 % To start with, you might want to simply use normalized patches as your
 % local feature. This is very simple to code and works OK. However, to get
@@ -56,7 +56,7 @@ function [features] = get_features(image, x, y, descriptor_window_image_width, s
 
 %Placeholder that you can delete. Empty features.
 features = zeros(size(x,1), 128, 'single');
-gauss_filter = fspecial('Gaussian', sz, 1);
+gauss_filter = fspecial('Gaussian', sz, 0.5);
 
 Dx = imderivative(gauss_filter, [1 0]);
 Dy = imderivative(gauss_filter, [0 1]);
@@ -70,20 +70,20 @@ for i = 1:size(x,1)
     end
     patch_Ix = Ix((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
     patch_Iy = Iy((y(i)-7):(y(i)+8),(x(i)-7):(x(i)+8));
-    main_dir = radtodeg(atan2(y(i),x(i)));
     %computing the tangent in degrees
-    orientation = radtodeg(atan2(patch_Iy,patch_Ix))-main_dir+180;
+    orientation = radtodeg(atan2(patch_Iy,patch_Ix))+180;
     %computing the 8 quandrants
     quads = ceil(orientation/45);
     for m = 1:4
         for n = 1:4
             patch4 = quads(m*4-3:m*4, n*4-3:n*4);
             qcounts = histcounts(patch4,0.5:1:8.5);
-%             [mx,idx] = max(qcounts);
-%             qcounts = circshift(qcounts, size(qcounts)-idx+1)
             features(i,(4*(m-1)+(n-1))*8+1:(4*(m-1)+(n-1))*8+8) = qcounts;
         end
     end
+    %normalize each feature
+    [mf,~] = max(features(i,:));
+    features(i,:) = features(i,:)/mf;
 end
 features = features.^0.8;
 end

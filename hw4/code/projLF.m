@@ -53,9 +53,12 @@ else
     [x1, y1, x2, y2] = cheat_interest_points(eval_file, scale_factor, image1, image2, descriptor_window_image_width);
 end
 %%
+size(x1)
 accs=[];
-size_range = 3:5;
+ts=[];
+size_range = 3:30;
 for s=size_range
+    tic;
     % 2) Create feature descriptors at each interest point. Szeliski 4.1.2
     [image1_features] = get_descriptors(image1, x1, y1, descriptor_window_image_width, s);
     [image2_features] = get_descriptors(image2, x2, y2, descriptor_window_image_width, s);
@@ -67,10 +70,13 @@ for s=size_range
     [~,~,accAll,accMPEND] = evaluate_correspondence(image1, image2, eval_file, scale_factor, ... 
                             x1, y1, x2, y2, matches, confidences, ...
                             maxPtsEval, visualize, 'eval_ND.png' );
-    accs(s) = accAll;
+    accs(s) = accAll
+    ts(s) = toc
 end
 figure
 plot(1:30, accs);
+figure
+plot(1:30, ts);
 [mx,idx] = max(accs)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,11 +100,6 @@ else
     [x1, y1, x2, y2] = cheat_interest_points(eval_file, scale_factor, image1, image2, descriptor_window_image_width);
 end
 
-%%
-size(x1)
-accs=[];
-size_range = 3:20;
-for s=size_range
     % 2) Create feature descriptors at each interest point. Szeliski 4.1.2
     [image1_features] = get_descriptors(image1, x1, y1, descriptor_window_image_width,s);
     [image2_features] = get_descriptors(image2, x2, y2, descriptor_window_image_width,s);
@@ -107,14 +108,9 @@ for s=size_range
     [matches, confidences] = match_features(image1_features, image2_features);
 
     % Evaluate matches
-    [~,~,accAll,accMPEMR] = evaluate_correspondence(image1, image2, eval_file, scale_factor, ... 
+    [~,~,~,accMPEMR] = evaluate_correspondence(image1, image2, eval_file, scale_factor, ... 
                             x1, y1, x2, y2, matches, confidences, ...
                             maxPtsEval, visualize, 'eval_MR.png' );
-    accs(s) = accAll;
-end
-figure
-plot(1:30, accs);
-[mx,idx] = max(accs)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
