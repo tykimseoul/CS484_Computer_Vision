@@ -38,7 +38,7 @@ function [x, y, confidence, scale, orientation] = get_interest_points(image, des
 
 % close all
 alpha = 0.05;
-threshold = -0.01;
+threshold = -0.007;
 
 %apply double derivative to the filter first then apply to the image, to remove the effects of noise
 gauss_filter = fspecial('Gaussian', 11, 0.5);

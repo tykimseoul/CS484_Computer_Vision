@@ -16,7 +16,7 @@
 %   following size: [length(x) x feature dimensionality] (e.g. 128 for
 %   standard SIFT)
 
-function [features] = get_features(image, x, y, descriptor_window_image_width,sz)
+function [features] = get_features(image, x, y, descriptor_window_image_width)
 
 % To start with, you might want to simply use normalized patches as your
 % local feature. This is very simple to code and works OK. However, to get
@@ -56,7 +56,7 @@ function [features] = get_features(image, x, y, descriptor_window_image_width,sz
 
 %Placeholder that you can delete. Empty features.
 features = zeros(size(x,1), 128, 'single');
-gauss_filter = fspecial('Gaussian', sz, 0.5);
+gauss_filter = fspecial('Gaussian', 4, 0.6);
 
 Dx = imderivative(gauss_filter, [1 0]);
 Dy = imderivative(gauss_filter, [0 1]);

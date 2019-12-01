@@ -23,7 +23,6 @@
 
 function [matches, confidences] = match_features(features1, features2)
 
-num_features = min(size(features1, 1), size(features2,1));
 pd = pairwise_distance(features1, features2);
 [sortdist, sortindex] = sort(pd,2,'ascend');
 nndr = sortdist(:,1)./sortdist(:,2);
