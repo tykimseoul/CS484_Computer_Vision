@@ -100,7 +100,13 @@ Use the MATLAB function \href{https://www.mathworks.com/help/images/ref/corner.h
 \emph{RISHLibrary} | \emph{Chase} | \emph{LaddObservatory}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{A1:} Your answer here.
+\paragraph{A1:} The image for Chase is shaken possibly due to low light conditions. Images for Ladd Observatory contain too much of different objects \emph{e.g.} people. Images for the RISH Library have different color tones. To design a feature point that match all of the three pairs, the conditions of them should be similar. However, in this case the three pairs have different characteristics that it is difficult for a common feature point to match them. This phenomenon is common in the real world, which makes it difficult to make  feature points.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.3\textwidth]{../code/chase.png}
+	\includegraphics[width=0.3\textwidth]{../code/ladd.png}
+	\includegraphics[width=0.3\textwidth]{../code/rish.png}
+\end{figure}
 
 
 
@@ -111,7 +117,7 @@ Use the MATLAB function \href{https://www.mathworks.com/help/images/ref/corner.h
 \paragraph{Q2:} In designing our feature point, what characteristics might we wish it to have? Describe the fundamental trade-off between feature point invariance and discriminative power. How should we design for this trade-off?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{A2:} Your answer here.
+\paragraph{A2:} Scale and orientation invariance would benefit the feature points. However, this could lead to cases in which a pattern-like image with patterns of different sizes are not distinguished. The patterns of different scale but of same shape would be considered as a same feature even if in fact they are not. A similar issue may arise for patterns of different orientation that are considered as the same. Parameters such as the window size and threshold could be adjusted so that the similar features are distinguished.
 
 
 
@@ -122,7 +128,7 @@ Use the MATLAB function \href{https://www.mathworks.com/help/images/ref/corner.h
 \paragraph{Q3:} In the Harris corner detector, what do the eigenvalues of the `M' second moment matrix represent? Discuss both how they relate to image intensity and how we can interpret them geometrically.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{A3:} Your answer here.
+\paragraph{A3:} The eigenvalues represent the axis lengths of the ellipse. The length of the major axis is determined by $\lambda_{min}$ by the formula $\frac{1}{\sqrt{\lambda_{min}}}$. The length of the minor axis is determined by $\lambda_{max}$ by the formula $\frac{1}{\sqrt{\lambda_{max}}}$. The minor axis is the direction of the fastest change in intensity, and the major axis is the direction of the slowest change in intensity.
 
 
 
@@ -134,7 +140,7 @@ Use the MATLAB function \href{https://www.mathworks.com/help/images/ref/corner.h
 \paragraph{Q4:} Explain the difference between the Euclidean distance and the cosine similarity metrics between descriptors. What might their geometric interpretations reveal about when each should be used? Given a distance metric, what is a good method for feature descriptor matching and why?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{A4:} Your answer here.
+\paragraph{A4:} The cosine similarity is calculated for $A$ and $B$ by the formula $\frac{\sum{A_iB_i}}{{\sqrt{\sum{A_i^2}}}{\sqrt{\sum{B_i^2}}}}$. The Euclidean distance is calculated by the formula $\sqrt{\sum{(B_i-A_i)}^2}$. The cosine similarity is measured by the angle between the vectors thus the magnitudes of them are not considered. In cases the magnitude of the feature vector is important, cosine similarity should not be used. \emph{L1 norm} or \emph{L2 norm} is used as a distance metric for feature matching of string based descriptors such as \emph{SIFT}, \emph{SURF} and \emph{KAZE}. The \emph{Hamming distance} is used for binary descriptors such as \emph{ORB}, \emph{BRISK}, and \emph{BRIEF}.
 
 
 
