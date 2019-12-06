@@ -23,14 +23,27 @@ function predicted_categories = nearest_neighbor_classify(train_image_feats, tra
 %   [Y,I] = SORT(X) if you're going to be reasoning about many nearest
 %   neighbors 
 
+% train_image_feats = [4 8 4; 5 2 4; 1 3 3; 2 5 1];
+% test_image_feats = [3 5 3; 5 2 6; 3 1 6; 2 7 1];
+% train_labels = {'Kitchen', 'Store', 'Bedroom', 'Store'}';
+% train_image_feats'
+% test_image_feats
 
+k = 20;
+N = size(test_image_feats,1);
+pd = pdist2(train_image_feats, test_image_feats);
+[~, sortindex] = sort(pd,1,'ascend');
 
+labels = categorical(unique(train_labels));
+num_labels = size(labels, 1);
+predicted_category = cell(num_labels,1);
 
+for i=1:N
+    top_sort = sortindex(1:k,i);
+    top_labels = categorical(train_labels(top_sort));
+    [label_votes,elected] = histcounts(top_labels, labels);
+    [~,mx_idx] = max(label_votes, [], 2);
+    predicted_categories(i,:) = elected(mx_idx);
+end
 
-
-
-
-
-
-
-
+end
