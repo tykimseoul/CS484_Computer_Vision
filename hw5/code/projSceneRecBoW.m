@@ -54,8 +54,8 @@ function projSceneRecBoW()
 FEATURE = 'bag of words';
 % FEATURE = 'placeholder';
 
-CLASSIFIER = 'nearest neighbor';
-% CLASSIFIER = 'support vector machine';
+% CLASSIFIER = 'nearest neighbor';
+CLASSIFIER = 'support vector machine';
 % CLASSIFIER = 'placeholder';
 
 data_path = '../data/'; 
@@ -96,7 +96,12 @@ fprintf('Getting paths and labels for all train and test data\n')
 % each function for more details.
 
 fprintf('Using %s representation for images\n', FEATURE)
-
+% d=[];
+% for cs=12:4:32
+%     for itv=16:2:20
+%         cs
+%         itv
+%         tic
 switch lower(FEATURE)    
     case 'tiny image'
         % YOU CODE get_tiny_images.m 
@@ -105,17 +110,17 @@ switch lower(FEATURE)
         
     case 'bag of words'
         % YOU CODE build_vocabulary.m
-%         if ~exist('vocab.mat', 'file')
+        if ~exist('vocab.mat', 'file')
             fprintf('No existing visual word vocabulary found. Computing one from training images\n')
-            vocab_size = 200; %Larger values will work better (to a point) but be slower to compute
-            vocab = build_vocabulary(train_image_paths, vocab_size);
+            vocab_size = 300; %Larger values will work better (to a point) but be slower to compute
+            vocab = build_vocabulary(train_image_paths, vocab_size, 20, 16);
             save('vocab.mat', 'vocab')
-%         end
-        %%
+        end
+        
         % YOU CODE get_bags_of_words.m
-        train_image_feats = get_bags_of_words(train_image_paths);
+        train_image_feats = get_bags_of_words(train_image_paths, 20, 16);
         % Possibly write out train_image_features here as a *.mat
-        test_image_feats  = get_bags_of_words(test_image_paths);
+        test_image_feats  = get_bags_of_words(test_image_paths, 20, 16);
         % Possibly write out test_image_features here as a *.mat
 
     case 'placeholder'
@@ -133,7 +138,7 @@ end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Step 2: Classify each test image by training and using the appropriate classifier
+% Step 2: Classify each test image by training and using the appropriate classifier
 % Each function to classify test features will return an N x 1 cell array,
 % where N is the number of test cases and each entry is a string indicating
 % the predicted category for each test image. Each entry in
@@ -163,7 +168,7 @@ end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Step 3: Build a confusion matrix and score the recognition system
+% Step 3: Build a confusion matrix and score the recognition system
 % You do not need to code anything in this section.
 
 % If we wanted to evaluate our recognition method properly we would train
@@ -175,12 +180,31 @@ end
 % your classifier performance. 
 % Where is it making mistakes? 
 % Are the confusions reasonable?
-create_results_webpage( train_image_paths, ...
+acc = create_results_webpage( train_image_paths, ...
                         test_image_paths, ...
                         train_labels, ...
                         test_labels, ...
                         categories, ...
                         abbr_categories, ...
                         predicted_categories)
+%     d=[d;cs itv acc toc];
+%     end
+% end
+% d
+%%
+size(d(:,3))
+figure;
+tri = delaunay(d(:,1),d(:,2));
+trisurf(tri,d(:,1),d(:,2),d(:,3))
+xlabel("cell size (px)")
+ylabel("interval (px)")
+zlabel("accuracy")
+figure;
+trisurf(tri,d(:,1),d(:,2),d(:,4))
+xlabel("cell size (px)")
+ylabel("interval (px)")
+zlabel("time (s)")
+
+
 
 end

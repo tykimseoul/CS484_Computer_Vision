@@ -1,7 +1,7 @@
 %This feature representation is described in the handout, lecture
 %materials, and Szeliski chapter 14.
 
-function image_feats = get_bags_of_words(image_paths)
+function image_feats = get_bags_of_words(image_paths, cs, itv)
 % image_paths is an N x 1 cell array of strings where each string is an
 % image path on the file system.
 
@@ -29,12 +29,12 @@ image_count = size(image_paths, 1);
 image_feats = zeros(image_count, vocab_size);
 
 forest = KDTreeSearcher(vocab);
-cell_size = [16 16];
-[pv,ph] = meshgrid(cell_size(1)+1:20:256, cell_size(2)+1:20:256);
+cell_size = [cs cs];
+[pv,ph] = meshgrid(cell_size(1)+1:itv:256, cell_size(2)+1:itv:256);
 points = reshape(cat(3, pv,ph),size(pv,1)*size(pv,2),2);
 
 for i=1:image_count
-    if (mod(i,100)==0)
+    if (mod(i,500)==0)
         disp(i);
     end
     img = im2single(imread(image_paths{i}));
@@ -43,7 +43,7 @@ for i=1:image_count
     [features, ~] = extractHOGFeatures(img,points, 'CellSize', cell_size);
 
     [idx , ~] = knnsearch(forest , double(features), 'K', 1);
-    image_feats(i,:) = histc(idx, 1:1:200)';
+    image_feats(i,:) = histc(idx, 1:1:vocab_size)';
 end
 
 end

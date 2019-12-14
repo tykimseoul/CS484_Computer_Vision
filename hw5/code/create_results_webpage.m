@@ -13,7 +13,7 @@
 % This webpage is similar to the one we created for the SUN database in
 % 2010: http://people.csail.mit.edu/jxiao/SUN/classification397.html
 
-function create_results_webpage( train_image_paths, test_image_paths, train_labels, test_labels, categories, abbr_categories, predicted_categories)
+function accuracy = create_results_webpage( train_image_paths, test_image_paths, train_labels, test_labels, categories, abbr_categories, predicted_categories)
 
 fprintf('Creating results_webpage/index.html, thumbnails, and confusion matrix\n')
 

@@ -35,6 +35,22 @@ function predicted_categories = svm_classify(train_image_feats, train_labels, te
 % 'categories' will not be in the same order as unique() sorts them. This shouldn't really matter, though.
 categories = unique(train_labels);
 num_categories = length(categories);
+scores = zeros(size(test_image_feats,1),num_categories);
+
+for i=1:num_categories
+    % two-class SVM for each category
+%     categories{i}
+    labels = double(strcmp(categories(i), train_labels));
+    labels(labels==0) = -1;
+    
+    M = fitcsvm(train_image_feats, labels);
+    [label,score] = predict(M,test_image_feats);
+    scores(:,i) = score(:,2);
+end
+
+[~, max_idx] = max(scores,[],2);
+size(max_idx)
+predicted_categories = categories(max_idx');
 
 
 
