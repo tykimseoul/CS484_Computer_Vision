@@ -102,6 +102,9 @@ fprintf('Using %s representation for images\n', FEATURE)
 %         cs
 %         itv
 %         tic
+t=[];
+for vs=200:200:2000
+tic
 switch lower(FEATURE)    
     case 'tiny image'
         % YOU CODE get_tiny_images.m 
@@ -110,12 +113,12 @@ switch lower(FEATURE)
         
     case 'bag of words'
         % YOU CODE build_vocabulary.m
-        if ~exist('vocab.mat', 'file')
+%         if ~exist('vocab.mat', 'file')
             fprintf('No existing visual word vocabulary found. Computing one from training images\n')
-            vocab_size = 300; %Larger values will work better (to a point) but be slower to compute
+            vocab_size = vs; %Larger values will work better (to a point) but be slower to compute
             vocab = build_vocabulary(train_image_paths, vocab_size, 20, 16);
             save('vocab.mat', 'vocab')
-        end
+%         end
         
         % YOU CODE get_bags_of_words.m
         train_image_feats = get_bags_of_words(train_image_paths, 20, 16);
@@ -189,7 +192,9 @@ acc = create_results_webpage( train_image_paths, ...
                         predicted_categories)
 %     d=[d;cs itv acc toc];
 %     end
-% end
+t=[t;vs acc toc];
+end
+t
 % d
 %%
 size(d(:,3))
@@ -204,6 +209,16 @@ trisurf(tri,d(:,1),d(:,2),d(:,4))
 xlabel("cell size (px)")
 ylabel("interval (px)")
 zlabel("time (s)")
+%%
+figure
+yyaxis left
+plot(t(:,1),t(:,2))
+ylabel("accuracy")
+yyaxis right
+plot(t(:,1),t(:,3))
+ylabel("time (s)")
+xlabel("vocabulary size")
+
 
 
 
