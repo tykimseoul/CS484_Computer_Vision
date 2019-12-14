@@ -16,4 +16,27 @@
 % Function outputs:
 % - 'vocab' should be vocab_size x descriptor length. Each row is a cluster centroid / visual word.
 
-function vocab = build_vocabulary( image_paths, vocab_size )
+function vocab = build_vocabulary(image_paths, vocab_size)
+
+N = size(image_paths, 1);
+
+cell_size = [16 16];
+[pv,ph] = meshgrid(cell_size(1)+1:20:256, cell_size(2)+1:20:256);
+points = reshape(cat(3, pv,ph),size(pv,1)*size(pv,2),2);
+
+feats = [];
+
+for i = 1:N
+    if (mod(i,100)==0)
+        disp(i);
+    end
+    img = im2single(imread(image_paths{i}));
+    img = imresize(img, [256 256]);
+    
+    [feature_vector,~] = extractHOGFeatures(img,points, 'CellSize',cell_size);
+    feats = cat(1,feats,feature_vector);
+end
+size(feats)
+[~,vocab] = kmeans(feats,vocab_size,'MaxIter',10000);
+size(vocab)
+end

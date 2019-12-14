@@ -50,8 +50,8 @@ function projSceneRecBoW()
 
 %% Step 0: Set up parameters, vlfeat, category list, and image paths.
 
-FEATURE = 'tiny image';
-% FEATURE = 'bag of words';
+% FEATURE = 'tiny image';
+FEATURE = 'bag of words';
 % FEATURE = 'placeholder';
 
 CLASSIFIER = 'nearest neighbor';
@@ -105,13 +105,13 @@ switch lower(FEATURE)
         
     case 'bag of words'
         % YOU CODE build_vocabulary.m
-        if ~exist('vocab.mat', 'file')
+%         if ~exist('vocab.mat', 'file')
             fprintf('No existing visual word vocabulary found. Computing one from training images\n')
             vocab_size = 200; %Larger values will work better (to a point) but be slower to compute
             vocab = build_vocabulary(train_image_paths, vocab_size);
             save('vocab.mat', 'vocab')
-        end
-        
+%         end
+        %%
         % YOU CODE get_bags_of_words.m
         train_image_feats = get_bags_of_words(train_image_paths);
         % Possibly write out train_image_features here as a *.mat
