@@ -96,15 +96,6 @@ fprintf('Getting paths and labels for all train and test data\n')
 % each function for more details.
 
 fprintf('Using %s representation for images\n', FEATURE)
-% d=[];
-% for cs=12:4:32
-%     for itv=16:2:20
-%         cs
-%         itv
-%         tic
-t=[];
-for vs=200:200:2000
-tic
 switch lower(FEATURE)    
     case 'tiny image'
         % YOU CODE get_tiny_images.m 
@@ -113,12 +104,12 @@ switch lower(FEATURE)
         
     case 'bag of words'
         % YOU CODE build_vocabulary.m
-%         if ~exist('vocab.mat', 'file')
+        if ~exist('vocab.mat', 'file')
             fprintf('No existing visual word vocabulary found. Computing one from training images\n')
-            vocab_size = vs; %Larger values will work better (to a point) but be slower to compute
+            vocab_size = 1200; %Larger values will work better (to a point) but be slower to compute
             vocab = build_vocabulary(train_image_paths, vocab_size, 20, 16);
             save('vocab.mat', 'vocab')
-%         end
+        end
         
         % YOU CODE get_bags_of_words.m
         train_image_feats = get_bags_of_words(train_image_paths, 20, 16);
@@ -141,7 +132,7 @@ end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Step 2: Classify each test image by training and using the appropriate classifier
+%% Step 2: Classify each test image by training and using the appropriate classifier
 % Each function to classify test features will return an N x 1 cell array,
 % where N is the number of test cases and each entry is a string indicating
 % the predicted category for each test image. Each entry in
@@ -154,7 +145,7 @@ fprintf('Using %s classifier to predict test set categories\n', CLASSIFIER)
 switch lower(CLASSIFIER)    
     case 'nearest neighbor'
         % YOU CODE nearest_neighbor_classify.m 
-        predicted_categories = nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats);
+        predicted_categories = nearest_neighbor_classify(train_image_feats, train_labels, test_image_feats, 6);
         
     case 'support vector machine'
         % YOU CODE svm_classify.m 
@@ -171,7 +162,7 @@ end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Step 3: Build a confusion matrix and score the recognition system
+%% Step 3: Build a confusion matrix and score the recognition system
 % You do not need to code anything in this section.
 
 % If we wanted to evaluate our recognition method properly we would train
@@ -189,37 +180,5 @@ acc = create_results_webpage( train_image_paths, ...
                         test_labels, ...
                         categories, ...
                         abbr_categories, ...
-                        predicted_categories)
-%     d=[d;cs itv acc toc];
-%     end
-t=[t;vs acc toc];
-end
-t
-% d
-%%
-size(d(:,3))
-figure;
-tri = delaunay(d(:,1),d(:,2));
-trisurf(tri,d(:,1),d(:,2),d(:,3))
-xlabel("cell size (px)")
-ylabel("interval (px)")
-zlabel("accuracy")
-figure;
-trisurf(tri,d(:,1),d(:,2),d(:,4))
-xlabel("cell size (px)")
-ylabel("interval (px)")
-zlabel("time (s)")
-%%
-figure
-yyaxis left
-plot(t(:,1),t(:,2))
-ylabel("accuracy")
-yyaxis right
-plot(t(:,1),t(:,3))
-ylabel("time (s)")
-xlabel("vocabulary size")
-
-
-
-
+                        predicted_categories);
 end
